@@ -1,16 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
 import parse from './parse_chordpro';
 import create from './create_chordpro';
 
-const helloStyle = {
-  color: 'blue'
-}
+const Title = styled.h1`
+  margin-left: 10px;
+  color: blue;
+`;
 
-const textStyle = {
-  width: "960px",
-  height: "500px",
-  margin: '10px'
-}
+const SubTitle = styled.p`
+  margin-left: 10px;
+`
+
+const TextBox = styled.textarea`
+  display: block;
+  width: 95%;
+  max-width: 960px;
+  height: 500px;
+  margin: 10px
+`;
+
+const Button = styled.button`
+  margin: 10px;
+  padding: 5px;
+`
 
 class App extends React.Component {
   constructor(props) {
@@ -43,26 +56,28 @@ class App extends React.Component {
     this.setState({ songInput: e.target.value });
   }
 
+
   render () {
     return(
     <div>
-      <h1 style= {helloStyle}>Welcome to Simple Chords</h1>
-      <p>This app helps those utilizing or creating ChordPro</p>
-      <textarea 
-        style={textStyle}
+      <Title>Welcome to Simple Chords</Title>
+      <SubTitle>This app helps those utilize and create ChordPro</SubTitle>
+      <TextBox 
         onChange={this.handleSongInput}
         value={this.state.songInput}
         placeholder='Type or paste your song here -->'
       />
-      <button
-        onClick={this.handleParse}
-      >From ChordPro</button>
-      <button
-        onClick={this.handleCreate}
-      >To ChordPro</button>
-      <button
-        onClick={this.handleUndo}
-      >Undo</button>
+      <div className='buttonBlock'>
+        <Button
+          onClick={this.handleParse}
+        >From ChordPro</Button>
+        <Button
+          onClick={this.handleCreate}
+        >To ChordPro</Button>
+        <Button
+          onClick={this.handleUndo}
+        >Undo</Button>
+      </div>
     </div>
   )};
 } 
