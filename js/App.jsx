@@ -15,8 +15,8 @@ const SubTitle = styled.p`
 const TextBox = styled.textarea`
   display: block;
   width: 95%;
-  max-width: 960px;
-  height: 500px;
+  max-width: 665px;
+  height: 400px;
   margin: 10px
 `;
 
@@ -28,16 +28,33 @@ const Button = styled.button`
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      songInput: '',
-      prevInput: ''
-    };
+    if(localStorage.data) {
+      this.state = JSON.parse(localStorage.data);
+    } else {
+      this.state = {
+        songInput: '',
+        prevInput: ''
+      };
+    }
+    
     this.handleSongInput = this.handleSongInput.bind(this);
     this.handleParse = this.handleParse.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
+  componentDidUpdate() {
+    localStorage.setItem('data', JSON.stringify(this.state));
+  }
+
+  handleClear() {
+    this.setState({
+      songInput: '',
+      prevInput: ''
+    })
+  }
+  
   handleParse() {
     this.setState({ prevInput: this.state.songInput });
     this.setState({ songInput: parse(this.state.songInput) });
@@ -56,12 +73,11 @@ class App extends React.Component {
     this.setState({ songInput: e.target.value });
   }
 
-
   render () {
     return(
     <div>
-      <Title>Welcome to Simple Chords</Title>
-      <SubTitle>This app helps those utilize and create ChordPro</SubTitle>
+      <Title>Simple ChordPro</Title>
+      <SubTitle>Utilize and create ChordPro</SubTitle>
       <TextBox 
         onChange={this.handleSongInput}
         value={this.state.songInput}
@@ -70,13 +86,16 @@ class App extends React.Component {
       <div className='buttonBlock'>
         <Button
           onClick={this.handleParse}
-        >From ChordPro</Button>
+        >ChordPro to Chord/Lyric</Button>
         <Button
           onClick={this.handleCreate}
-        >To ChordPro</Button>
+        >Chord/Lyric to ChordPro</Button>
         <Button
           onClick={this.handleUndo}
         >Undo</Button>
+        <Button
+          onClick={this.handleClear}
+        >Clear</Button>
       </div>
     </div>
   )};
