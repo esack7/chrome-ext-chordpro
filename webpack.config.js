@@ -5,21 +5,22 @@ const path = require('path');
 const webpack = require('webpack');
 
 let plugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
+let entry = [
+  'react-hot-loader/patch',
+  'webpack-dev-server/client?http://localhost:8080',
+  'webpack/hot/only-dev-server',
+  './js/ClientApp.jsx'
+];
 
 if (production) {
-  console.log(process.env.NODE_ENV);
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
+  entry = './js/ClientApp.jsx';
 }
 
 module.exports = {
   plugins,
   context: __dirname,
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    './js/ClientApp.jsx'
-  ],
+  entry,
   devtool: production ? undefined : 'cheap-eval-source-map',
   output: {
     path: path.join(__dirname, 'public'),
