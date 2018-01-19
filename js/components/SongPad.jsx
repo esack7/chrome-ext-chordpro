@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextBox, Buttons } from '../style/Styles';
+import { TextBox, Buttons, Aside } from '../style/Styles';
 import parse from '../utils/parse_chordpro';
 import create from '../utils/create_chordpro';
 
@@ -54,17 +54,17 @@ class SongPad extends React.Component {
   render() {
     return (
       <div>
+        <Aside>
+          <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
+          <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
+          <Buttons onClick={this.handleUndo}>Undo</Buttons>
+          <Buttons onClick={this.handleClear}>Clear</Buttons>
+        </Aside>
         <TextBox
           onChange={this.handleSongInput}
           value={this.state.songInput}
           placeholder="Type or paste your song here -->"
         />
-        <div className="buttonBlock">
-          <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
-          <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
-          <Buttons onClick={this.handleUndo}>Undo</Buttons>
-          <Buttons onClick={this.handleClear}>Clear</Buttons>
-        </div>
       </div>
     );
   }
