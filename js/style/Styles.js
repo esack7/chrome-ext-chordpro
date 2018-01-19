@@ -47,6 +47,8 @@ const Aside = styled.aside`
 const Buttons = styled.button`
   margin: 10px;
   padding: 5px;
+  width: 99px;
+  border-radius: 10px;
 `;
 
 const NonHyper = styled.a`
@@ -61,7 +63,8 @@ const Foot = styled.div`
 `;
 
 const FootText = styled.h3`
-  font-size: 16px;
+  font-size: 17px;
+  text-align: center;
 `;
 
 export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText };
