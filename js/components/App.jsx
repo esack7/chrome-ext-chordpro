@@ -31,7 +31,8 @@ class App extends React.Component {
       return (
         <AppContain>
           <Header />
-          <ImportPdf goBack={this.handleImportPdfClick}/>
+          <ImportPdf
+            goBack={this.handleImportPdfClick}/>
           <Footer />
         </AppContain>
       );

@@ -72,4 +72,21 @@ const Setting = styled.div`
   margin: 10px;
 `;
 
-export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText, Setting };
+const Explain = styled.h1`
+  font-size: 20px;
+  text-align: center;
+  color: #FFF;
+  padding-top: 25px;
+  padding-bottom: 75px;
+`
+
+const FileInput = styled.input`
+  display: block;
+  padding: 50px;
+  border: solid #FFF 1px;
+  margin: auto;
+  margin-bottom: 75px;
+  background-color: hsl(220, 14%, 71%);
+`
+
+export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText, Setting, Explain, FileInput };
