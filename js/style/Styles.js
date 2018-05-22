@@ -67,4 +67,9 @@ const FootText = styled.h3`
   text-align: center;
 `;
 
-export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText };
+const Setting = styled.div`
+  height: 410px;
+  margin: 10px;
+`;
+
+export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText, Setting };
