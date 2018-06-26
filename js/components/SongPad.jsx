@@ -28,8 +28,8 @@ class SongPad extends React.Component {
   }
 
   handleClear() {
-    this.setState({ prevInput: this.state.songInput})
-    this.setState({ songInput: ''});
+    this.setState({ prevInput: this.state.songInput })
+    this.setState({ songInput: '' });
   }
 
   handleParse() {
@@ -56,10 +56,10 @@ class SongPad extends React.Component {
         <Aside>
           <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
           <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
+          <Buttons onClick={this.props.importPdfClick}>Import PDF</Buttons>
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
-          <Buttons onClick={this.props.importPdfClick}>Import PDF</Buttons>
-          <Buttons onClick={this.props.transposeClick}>Transpose</Buttons>
+          {/* <Buttons onClick={this.props.transposeClick}>Transpose</Buttons> */}
         </Aside>
         <TextBox
           onChange={this.handleSongInput}
@@ -73,7 +73,7 @@ class SongPad extends React.Component {
 
 SongPad.propTypes = {
   importPdfClick: PropTypes.func.isRequired,
-  transposeClick: PropTypes.func.isRequired
+  // transposeClick: PropTypes.func.isRequired
 }
 
 export default SongPad;
