@@ -5,4 +5,4 @@ const fileReader = file => new Promise((resolve, reject) => {
   return file ? reader.readAsBinaryString(file) : reject(new Error('USAGE ERROR; requires file'));
 });
 
-export default fileReader
+export default fileReader;
