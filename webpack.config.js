@@ -4,20 +4,28 @@ const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-let plugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
+let plugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+];
+
 let entry = [
   'react-hot-loader/patch',
   'webpack-dev-server/client?http://localhost:8080',
   'webpack/hot/only-dev-server',
-  './js/ClientApp.jsx'
+  './js/ClientApp.jsx',
 ];
+
+let mode = 'development';
 
 if (production) {
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
   entry = './js/ClientApp.jsx';
+  mode = 'production';
 }
 
 module.exports = {
+  mode,
   plugins,
   context: __dirname,
   entry,
@@ -25,20 +33,20 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: production ? 'popup.js' : 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/public/',
   },
   devServer: {
     hot: true,
     publicPath: '/public/',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', 'json']
+    extensions: ['.js', '.jsx', 'json'],
   },
   stats: {
     colors: true,
     reasons: true,
-    chunks: true
+    chunks: true,
   },
   module: {
     rules: [
@@ -46,12 +54,12 @@ module.exports = {
         enforce: 'pre',
         test: /\.jsx?$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };

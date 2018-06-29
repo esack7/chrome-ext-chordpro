@@ -67,4 +67,40 @@ const FootText = styled.h3`
   text-align: center;
 `;
 
-export { BaseStyles, AppContain, Title, SubTitle, TextBox, Aside, Buttons, NonHyper, Foot, FootText };
+const Setting = styled.div`
+  height: 410px;
+  margin: 10px;
+`;
+
+const Explain = styled.h1`
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 75px;
+`;
+
+const FileInput = styled.input`
+  display: block;
+  padding: 50px;
+  border: solid #fff 1px;
+  margin: auto;
+  margin-bottom: 75px;
+  background-color: hsl(220, 14%, 71%);
+`;
+
+export {
+  BaseStyles,
+  AppContain,
+  Title,
+  SubTitle,
+  TextBox,
+  Aside,
+  Buttons,
+  NonHyper,
+  Foot,
+  FootText,
+  Setting,
+  Explain,
+  FileInput,
+};
