@@ -12,7 +12,7 @@ class SongPad extends React.Component {
     } else {
       this.state = {
         songInput: '',
-        prevInput: ''
+        prevInput: '',
       };
     }
 
@@ -28,22 +28,26 @@ class SongPad extends React.Component {
   }
 
   handleClear() {
-    this.setState({ prevInput: this.state.songInput })
+    const { songInput } = this.state;
+    this.setState({ prevInput: songInput });
     this.setState({ songInput: '' });
   }
 
   handleParse() {
-    this.setState({ prevInput: this.state.songInput });
-    this.setState({ songInput: parse(this.state.songInput) });
+    const { songInput } = this.state;
+    this.setState({ prevInput: songInput });
+    this.setState({ songInput: parse(songInput) });
   }
 
   handleCreate() {
-    this.setState({ prevInput: this.state.songInput });
-    this.setState({ songInput: create(this.state.songInput) });
+    const { songInput } = this.state;
+    this.setState({ prevInput: songInput });
+    this.setState({ songInput: create(songInput) });
   }
 
   handleUndo() {
-    this.setState({ songInput: this.state.prevInput });
+    const { prevInput } = this.state;
+    this.setState({ songInput: prevInput });
   }
 
   handleSongInput(e) {
@@ -51,19 +55,21 @@ class SongPad extends React.Component {
   }
 
   render() {
+    const { importPdfClick } = this.props;
+    const { songInput } = this.state;
     return (
       <div>
         <Aside>
           <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
           <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
-          <Buttons onClick={this.props.importPdfClick}>Import PDF</Buttons>
+          <Buttons onClick={importPdfClick}>Import PDF</Buttons>
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
-          {/* <Buttons onClick={this.props.transposeClick}>Transpose</Buttons> */}
+          {/* <Buttons onClick={transposeClick}>Transpose</Buttons> */}
         </Aside>
         <TextBox
           onChange={this.handleSongInput}
-          value={this.state.songInput}
+          value={songInput}
           placeholder="Type or paste your song here -->"
         />
       </div>
@@ -73,7 +79,7 @@ class SongPad extends React.Component {
 
 SongPad.propTypes = {
   importPdfClick: PropTypes.func.isRequired,
-  // transposeClick: PropTypes.func.isRequired
-}
+  // transposeClick: PropTypes.func.isRequired,
+};
 
 export default SongPad;

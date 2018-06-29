@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { BaseStyles, AppContain } from '../style/Styles';
 import Header from './Header';
 import SongPad from './SongPad';
@@ -18,27 +18,29 @@ class App extends React.Component {
   }
 
   handleImportPdfClick() {
-    this.setState({ importPdf: !this.state.importPdf })
+    const { importPdf } = this.state;
+    this.setState({ importPdf: !importPdf });
   }
 
   handleTransposeClick() {
-    this.setState({ transpose: !this.state.transpose })
+    const { transpose } = this.state;
+    this.setState({ transpose: !transpose });
   }
 
   render() {
+    const { importPdf, transpose } = this.state;
     BaseStyles();
-    if (this.state.importPdf) {
+    if (importPdf) {
       return (
         <AppContain>
           <Header />
-          <ImportPdf
-            goBack={this.handleImportPdfClick} />
+          <ImportPdf goBack={this.handleImportPdfClick} />
           <Footer />
         </AppContain>
       );
     }
 
-    if (this.state.transpose) {
+    if (transpose) {
       return (
         <AppContain>
           <Header />
@@ -53,7 +55,8 @@ class App extends React.Component {
         <Header />
         <SongPad
           transposeClick={this.handleTransposeClick}
-          importPdfClick={this.handleImportPdfClick} />
+          importPdfClick={this.handleImportPdfClick}
+        />
         <Footer />
       </AppContain>
     );

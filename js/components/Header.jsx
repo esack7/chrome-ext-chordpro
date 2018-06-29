@@ -6,6 +6,6 @@ const Header = () => (
     <Title>Simple ChordPro</Title>
     <SubTitle>Utilize and create ChordPro</SubTitle>
   </div>
-)
+);
 
 export default Header;

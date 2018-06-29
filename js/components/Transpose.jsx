@@ -9,10 +9,11 @@ class Transpose extends React.Component {
   }
 
   render() {
+    const { goBack } = this.props;
     return (
       <Setting>
         <h1>This is transpose</h1>
-        <Buttons onClick={this.props.goBack}>Go Back</Buttons>
+        <Buttons onClick={goBack}>Go Back</Buttons>
       </Setting>
     );
   }
@@ -20,6 +21,6 @@ class Transpose extends React.Component {
 
 Transpose.propTypes = {
   goBack: PropTypes.func.isRequired,
-}
+};
 
 export default Transpose;

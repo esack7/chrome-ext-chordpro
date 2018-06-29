@@ -1,4 +1,4 @@
-import TextObj from '../utils/textObj';
+import TextObj from './textObj';
 
 const handleText = textArr => {
   textArr.pop();
