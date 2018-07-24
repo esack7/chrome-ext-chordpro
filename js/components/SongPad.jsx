@@ -51,7 +51,15 @@ class SongPad extends React.Component {
   }
 
   handleSongInput(e) {
-    this.setState({ songInput: e.target.value });
+    // Allows song stings to be pasted directly into SongPad
+    let { value } = e.target;
+    if (value.split('\\r\\n').length > 1) {
+      value = value.split('\\r\\n').join('\n');
+    }
+    if (value.split('\\n').length > 1) {
+      value = value.split('\\n').join('\n');
+    }
+    this.setState({ songInput: value });
   }
 
   render() {
