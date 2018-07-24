@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p --progress;",
     "watch": "webpack-dev-server --watch",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:coverage": "jest --coverage",
     "test:update": "jest -u"
   },
