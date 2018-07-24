@@ -1,8 +1,10 @@
 module.exports = song => {
   let line = '';
   const arrBlock = song.split('\n\n');
+  // console.log(arrBlock);
   arrBlock.map(ele => {
     const arrLines = ele.split('\n');
+    // console.log(arrLines);
     line = `${line}${arrLines[0]}\n`;
     for (let i = 2; i < arrLines.length; i += 2) {
       const chords = [];
