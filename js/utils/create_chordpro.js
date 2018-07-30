@@ -1,14 +1,43 @@
 module.exports = song => {
-  let line = '';
-  const arrBlock = song.split('\n\n');
-  arrBlock.map(ele => {
-    const arrLines = ele.split('\n');
-    line = `${line}${arrLines[0]}\n`;
-    for (let i = 2; i < arrLines.length; i += 2) {
+  let songString = ''; // sets var to build new string
+  const arrBlock = song.split('\n\n'); // breaks into blocks separated by a line.
+  arrBlock.map(block => {
+    const blockLines = block.split('\n');
+    let previousChords = [];
+    blockLines.map((line, index) => {
+      const chordCheck = line.replace(
+        // This regex determines if a there is a chord in a single line and changes the chords to have brackets [chords]
+        /(\b([CDEFGAB](?:b|bb)*(?:#|#m|##|m|sus|maj|min|aug)*[\d/]*(?:[CDEFGAB](?:b|bb)*(?:#|##|sus|maj|min|aug)*[\d/]*)*)(?=\s|$)(?! \w))/gm,
+        '[$2]'
+      );
+      if (line === chordCheck) {
+        // This checks to see if line contains chords and previous line didn't either.
+        if (previousChords.length) {
+          let longer;
+          // console.log(`There were previous chords:\n${previousChords}`);
+          const lyrics = line.split('');
+          if (previousChords.length >= lyrics.length)
+            longer = previousChords.length;
+          longer = lyrics.length;
+          for (let j = 0; j < longer; j += 1) {
+            let a = '';
+            if (previousChords[j]) {
+              a = `[${previousChords[j]}]`;
+            }
+            let b = '';
+            if (lyrics[j]) {
+              b = lyrics[j];
+            }
+            songString = `${songString}${a}${b}`;
+          }
+          songString = `${songString}\n`;
+          return songString;
+        }
+        songString = `${songString}${line}\n`;
+        return songString;
+      }
       const chords = [];
-      let longer;
-      const regresar = [];
-      const chordSplit = arrLines[i - 1].split(' ');
+      const chordSplit = line.split(' ');
       chordSplit.map(idx => {
         if (idx.length) {
           const repeat = idx.length;
@@ -21,29 +50,11 @@ module.exports = song => {
         }
         return null;
       });
-      regresar.push(chords);
-      const lyrics = arrLines[i].split('');
-      regresar.push(lyrics);
-      if (regresar[0].length >= regresar[1].length) {
-        longer = regresar[0].length;
-      } else {
-        longer = regresar[1].length;
-      }
-      for (let j = 0; j < longer; j += 1) {
-        let a = '';
-        if (regresar[0][j]) {
-          a = `[${regresar[0][j]}]`;
-        }
-        let b = '';
-        if (regresar[1][j]) {
-          b = regresar[1][j];
-        }
-        line = `${line}${a}${b}`;
-      }
-      line = `${line}\n`;
-    }
-    line = `${line}\n`;
-    return line;
+      previousChords = chords;
+      return null;
+    });
+    songString = `${songString}\n`; // adds block to the songString
+    return songString;
   });
-  return line.trim();
+  return songString.trim();
 };
