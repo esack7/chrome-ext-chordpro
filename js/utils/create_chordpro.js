@@ -1,3 +1,5 @@
+const chordCheck = require('./detectChords');
+
 module.exports = song => {
   let songString = ''; // sets var to build new string
   const arrBlock = song.split('\n\n'); // breaks into blocks separated by a line.
@@ -5,16 +7,9 @@ module.exports = song => {
     const blockLines = block.split('\n');
     let previousChords = [];
     blockLines.map((line, index) => {
-      const chordCheck = line.replace(
-        // This regex determines if a there is a chord in a single line and changes the chords to have brackets [chords]
-        /(\b([CDEFGAB](?:b|bb)*(?:#|#m|##|m|sus|maj|min|aug)*[\d/]*(?:[CDEFGAB](?:b|bb)*(?:#|##|sus|maj|min|aug)*[\d/]*)*)(?=\s|$)(?! \w))/gm,
-        '[$2]'
-      );
-      if (line === chordCheck) {
-        // This checks to see if line contains chords and previous line didn't either.
+      if (!chordCheck(line)) {
         if (previousChords.length) {
           let longer;
-          // console.log(`There were previous chords:\n${previousChords}`);
           const lyrics = line.split('');
           if (previousChords.length >= lyrics.length)
             longer = previousChords.length;
