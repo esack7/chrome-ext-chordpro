@@ -1,13 +1,9 @@
-const { Chords, Numbers } = require('./chords');
-
 module.exports = songline => {
-  const songlineArray = songline.split(' ').filter(single => single !== '');
-  const songlineArrayFirst = songlineArray.map(ele => ele.split('')[0]);
-
-  if (
-    songlineArrayFirst.every(ele => Chords.includes(ele)) ||
-    songlineArrayFirst.every(ele => Numbers.includes(ele) || ele === '♭')
-  )
-    return true;
-  return false;
+  const chordCheck = songline.replace(
+    // This regex determines if a there is a chord in a single line and changes the chords to have brackets [chords]
+    /(\b([CDEFGAB](?:b|bb)*(?:#|#m|##|m|sus|maj|min|aug)*[\d/]*(?:[CDEFGAB](?:b|bb)*(?:#|##|sus|maj|min|aug)*[\d/]*)*)(?=\s|$)(?! \w))/gm,
+    '[$2]'
+  );
+  if (songline === chordCheck) return false;
+  return true;
 };

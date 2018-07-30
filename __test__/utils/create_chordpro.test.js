@@ -3,10 +3,14 @@ const create = require('../../js/utils/create_chordpro');
 describe('Testing create_chordpro.js file', () => {
   const singleChordLyric = `G              D\nHello there birdie!`;
   const singleChordLyricChordpro = `[G]Hello there bir[D]die!`;
+  const singleLongChordLyric = `G              D        A\nHello there birdie!`;
+  const singleLongChordLyricChordpro = `[G]Hello there bir[D]die!     [A]`;
   const singleTitleChordLyric = `Title\nG              D\nHello there birdie!`;
   const singleTitleChordLyricChordpro = `Title\n[G]Hello there bir[D]die!`;
   const singleDescription = `Description`;
   const singleDescriptionChordPro = `${singleDescription}`;
+  const singleTitleChord = `Title\nG              D`;
+  const singleTitleChordChordpro = `Title\n[G]               [D]`;
   test('Will return type string', () => {
     expect(typeof create('string')).toBe(typeof 'string');
   });
@@ -31,7 +35,13 @@ describe('Testing create_chordpro.js file', () => {
       `${singleDescriptionChordPro}\n\n${singleTitleChordLyricChordpro}`
     );
   });
-  xtest('2 line block of Chord/Lyrics will convert properly to 1 line chordpro', () => {
+  test('2 line block of Chord/Lyrics will convert properly to 1 line chordpro', () => {
     expect(create(singleChordLyric)).toBe(singleChordLyricChordpro);
+  });
+  xtest('2 line block of Chord/Lyrics w/chords that extend beyond lyrics will convert properly to 1 line chordpro', () => {
+    expect(create(singleLongChordLyric)).toBe(singleLongChordLyricChordpro);
+  });
+  xtest('2 line block of Title/Chord will convert properly to 2 line of chordpro', () => {
+    expect(create(singleTitleChord)).toBe(singleTitleChordChordpro);
   });
 });
