@@ -1,4 +1,5 @@
 const chordCheck = require('./detectChords');
+const makeChordpro = require('./makeChordpro');
 
 module.exports = song => {
   let songString = ''; // sets var to build new string
@@ -7,13 +8,18 @@ module.exports = song => {
     const blockLines = block.split('\n');
     let previousChords = [];
     blockLines.map((line, index) => {
-      if (!chordCheck(line)) {
+      if (!chordCheck(line) && !!line.trim()) {
         if (previousChords.length) {
           let longer;
           const lyrics = line.split('');
-          if (previousChords.length >= lyrics.length)
+          if (previousChords.length >= lyrics.length) {
             longer = previousChords.length;
-          longer = lyrics.length;
+            while (previousChords.length > lyrics.length) {
+              lyrics.push(' ');
+            }
+          } else {
+            longer = lyrics.length;
+          }
           for (let j = 0; j < longer; j += 1) {
             let a = '';
             if (previousChords[j]) {
@@ -26,10 +32,10 @@ module.exports = song => {
             songString = `${songString}${a}${b}`;
           }
           songString = `${songString}\n`;
-          return songString;
+          return null;
         }
         songString = `${songString}${line}\n`;
-        return songString;
+        return null;
       }
       const chords = [];
       const chordSplit = line.split(' ');
@@ -45,11 +51,15 @@ module.exports = song => {
         }
         return null;
       });
+      if (index === blockLines.length - 1) {
+        songString = `${songString}${makeChordpro(line)}\n`;
+        return null;
+      }
       previousChords = chords;
       return null;
     });
     songString = `${songString}\n`; // adds block to the songString
-    return songString;
+    return null;
   });
   return songString.trim();
 };
