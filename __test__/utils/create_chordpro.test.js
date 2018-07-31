@@ -10,7 +10,7 @@ describe('Testing create_chordpro.js file', () => {
   const singleDescription = `Description`;
   const singleDescriptionChordPro = `${singleDescription}`;
   const singleTitleChord = `Title\nG              D`;
-  const singleTitleChordChordpro = `Title\n[G]               [D]`;
+  const singleTitleChordChordpro = `Title\n[G]              [D]`;
   test('Will return type string', () => {
     expect(typeof create('string')).toBe(typeof 'string');
   });
@@ -38,10 +38,15 @@ describe('Testing create_chordpro.js file', () => {
   test('2 line block of Chord/Lyrics will convert properly to 1 line chordpro', () => {
     expect(create(singleChordLyric)).toBe(singleChordLyricChordpro);
   });
-  xtest('2 line block of Chord/Lyrics w/chords that extend beyond lyrics will convert properly to 1 line chordpro', () => {
+  test('2 line block of Chord/Lyrics where chords extend beyond lyrics will convert properly to 1 line chordpro', () => {
     expect(create(singleLongChordLyric)).toBe(singleLongChordLyricChordpro);
   });
-  xtest('2 line block of Title/Chord will convert properly to 2 line of chordpro', () => {
+  test('2 line block of Title/Chord will convert properly to 2 line of chordpro', () => {
     expect(create(singleTitleChord)).toBe(singleTitleChordChordpro);
+  });
+  test('3 line block of Title/Chords/Lyrics plus newline will convert properly to 2 line chordpro', () => {
+    expect(create(`${singleTitleChordLyric}\n`)).toBe(
+      `${singleTitleChordLyricChordpro}`
+    );
   });
 });
