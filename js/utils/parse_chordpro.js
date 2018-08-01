@@ -70,8 +70,9 @@ module.exports = chordPro => {
     parsed = `${parsed}\n`;
     return parsed;
   });
-  console.log(parsed.split('')[0].charCodeAt(1));
-  // Need to figure out logic that will trim or trimRight depending on if first line is chords or not
-  if (parsed.split('')[0] === '\n') return parsed.trim();
-  return parsed.trimRight();
+  if (parsed.charCodeAt(1) === 32) {
+    const newParsed = parsed.substring(1);
+    return newParsed.trimRight();
+  }
+  return parsed.trim();
 };
