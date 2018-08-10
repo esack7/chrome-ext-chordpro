@@ -1,4 +1,5 @@
 const { keyChords } = require('./chords');
+const extract = require('./chordExtract');
 
 module.exports = (song, currentKey, transposeKey) => {
   const logic = song
@@ -10,11 +11,12 @@ module.exports = (song, currentKey, transposeKey) => {
           .map(section => {
             if (section.includes(']')) {
               const x = section.split(']');
-              let chord = x[0];
+              let wholeChord = x[0];
               // implement extractChord(chord)
+              const { chord, postfix } = extract(wholeChord, currentKey);
               const index = keyChords[currentKey].indexOf(chord);
-              chord = keyChords[transposeKey][index];
-              x[0] = chord;
+              wholeChord = keyChords[transposeKey][index] + postfix;
+              x[0] = wholeChord;
               return x.join(']');
             }
             return section;
