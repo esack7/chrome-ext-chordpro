@@ -64,7 +64,7 @@ class SongPad extends React.Component {
   }
 
   render() {
-    const { importPdfClick } = this.props;
+    const { importPdfClick, transposeClick } = this.props;
     const { songInput } = this.state;
     return (
       <div>
@@ -74,7 +74,7 @@ class SongPad extends React.Component {
           <Buttons onClick={importPdfClick}>Import PDF</Buttons>
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
-          {/* <Buttons onClick={transposeClick}>Transpose</Buttons> */}
+          <Buttons onClick={transposeClick}>Transpose</Buttons>
         </Aside>
         <TextBox
           onChange={this.handleSongInput}
@@ -88,7 +88,7 @@ class SongPad extends React.Component {
 
 SongPad.propTypes = {
   importPdfClick: PropTypes.func.isRequired,
-  // transposeClick: PropTypes.func.isRequired,
+  transposeClick: PropTypes.func.isRequired,
 };
 
 export default SongPad;
