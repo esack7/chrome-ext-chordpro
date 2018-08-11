@@ -18,6 +18,9 @@ describe('Testing create_chordpro.js file', () => {
     expect(create(singleTitleChordLyric)).toBe(singleTitleChordLyricChordpro);
   });
   test('A set of 3 line blocks of Title/Chords/Lyrics will convert properly to 5 lines of chordpro', () => {
+    console.log(
+      `${singleTitleChordLyricChordpro}\n\n${singleTitleChordLyricChordpro}`
+    );
     expect(create(`${singleTitleChordLyric}\n\n${singleTitleChordLyric}`)).toBe(
       `${singleTitleChordLyricChordpro}\n\n${singleTitleChordLyricChordpro}`
     );
