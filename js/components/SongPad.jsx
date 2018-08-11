@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid/v4';
 import { TextBox, Buttons, Aside } from '../style/Styles';
 import parse from '../utils/parse_chordpro';
 import create from '../utils/create_chordpro';
+import { keyList } from '../utils/chords';
 
 class SongPad extends React.Component {
   constructor(props) {
@@ -71,10 +73,39 @@ class SongPad extends React.Component {
         <Aside>
           <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
           <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
+          <label htmlFor="currentKey">
+            Current Key
+            <select
+              name="currentKey"
+              id="currentKey"
+              onChange={this.handleSelectCurrentKey}
+            >
+              {keyList.map(ele => (
+                <option key={uuid()} value={ele}>
+                  {ele}
+                </option>
+              ))}
+            </select>
+          </label>
+          <br />
+          <label htmlFor="newKey">
+            New Key
+            <select
+              name="newKey"
+              id="newKey"
+              onChange={this.handleSelectNewKey}
+            >
+              {keyList.map(ele => (
+                <option key={uuid()} value={ele} typeof="newKey">
+                  {ele}
+                </option>
+              ))}
+            </select>
+          </label>
+          <Buttons onClick={transposeClick}>Transpose</Buttons>
           <Buttons onClick={importPdfClick}>Import PDF</Buttons>
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
-          <Buttons onClick={transposeClick}>Transpose</Buttons>
         </Aside>
         <TextBox
           onChange={this.handleSongInput}

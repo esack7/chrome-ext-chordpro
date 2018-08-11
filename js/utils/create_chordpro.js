@@ -9,6 +9,8 @@ module.exports = song => {
     let previousChords = [];
     blockLines.map((line, index) => {
       if (!chordCheck(line) && !!line.trim()) {
+        // console.log('Line meets criteria: ', line);
+
         if (previousChords.length) {
           let longer;
           const lyrics = line.split('');
@@ -37,9 +39,11 @@ module.exports = song => {
         songString = `${songString}${line}\n`;
         return null;
       }
+      console.log(line);
       const chords = [];
       const chordSplit = line.split(' ');
       chordSplit.map(idx => {
+        // console.log(idx);
         if (idx.length) {
           const repeat = idx.length;
           chords.push(idx);
@@ -55,10 +59,12 @@ module.exports = song => {
         songString = `${songString}${makeChordpro(line)}\n`;
         return null;
       }
+      console.log('chords: ', chords);
+      console.log('previousChords', previousChords);
       previousChords = chords;
       return null;
     });
-    songString = `${songString}\n`; // adds block to the songString
+    songString = `${songString}\n\n`; // adds block to the songString
     return null;
   });
   return songString.trim();
