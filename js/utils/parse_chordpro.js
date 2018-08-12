@@ -1,3 +1,5 @@
+const lineTrim = require('./lineTrim');
+
 const detectChordpro = line => {
   if (line.split('').includes('[')) return true;
   return false;
@@ -30,6 +32,7 @@ const splitLine = line => {
   let lyricLine = '';
   let chordOnly = false;
   const splitLineArr = line.split('');
+  let chordHold = 0;
   splitLineArr.map((char, index) => {
     if (char === '[' || char === ']') {
       chordOnly = !chordOnly;
@@ -37,13 +40,20 @@ const splitLine = line => {
     }
     if (chordOnly) {
       chordLine = `${chordLine}${char}`;
+      chordHold += 1;
       return null;
     }
     if (splitLineArr[index + 1] === '[') {
+      chordLine = `${chordLine} `;
       lyricLine = `${lyricLine}${char}`;
       return null;
     }
-    chordLine = `${chordLine} `;
+    if (chordHold === 0) {
+      chordLine = `${chordLine} `;
+    }
+    if (chordHold > 0) {
+      chordHold -= 1;
+    }
     lyricLine = `${lyricLine}${char}`;
     return null;
   });
@@ -51,8 +61,9 @@ const splitLine = line => {
 };
 
 module.exports = chordPro => {
+  const linetrim = lineTrim(chordPro);
   let parsed = '';
-  const blockArr = chordPro.split('\n\n');
+  const blockArr = linetrim.split('\n\n');
   blockArr.map(block => {
     const lineArr = block.split('\n');
     lineArr.map(line => {
