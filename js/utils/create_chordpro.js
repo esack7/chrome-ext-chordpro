@@ -1,19 +1,20 @@
 const chordCheck = require('./detectChords');
 const makeChordpro = require('./makeChordpro');
+const lineTrim = require('./lineTrim');
 
 module.exports = song => {
+  const trimSong = lineTrim(song);
   let songString = ''; // sets var to build new string
-  const arrBlock = song.split('\n\n'); // breaks into blocks separated by a line.
+  const arrBlock = trimSong.split('\n\n'); // breaks into blocks separated by a line.
   arrBlock.map(block => {
     const blockLines = block.split('\n');
     let previousChords = [];
     blockLines.map((line, index) => {
-      if (!chordCheck(line) && !!line.trim()) {
-        // console.log('Line meets criteria: ', line);
-
+      const trimline = line.trimRight();
+      if (!chordCheck(trimline) && !!trimline.trim()) {
         if (previousChords.length) {
           let longer;
-          const lyrics = line.split('');
+          const lyrics = trimline.split('');
           if (previousChords.length >= lyrics.length) {
             longer = previousChords.length;
             while (previousChords.length > lyrics.length) {
@@ -36,12 +37,11 @@ module.exports = song => {
           songString = `${songString}\n`;
           return null;
         }
-        songString = `${songString}${line}\n`;
+        songString = `${songString}${trimline}\n`;
         return null;
       }
-      console.log(line);
       const chords = [];
-      const chordSplit = line.split(' ');
+      const chordSplit = trimline.split(' ');
       chordSplit.map(idx => {
         // console.log(idx);
         if (idx.length) {
@@ -56,15 +56,23 @@ module.exports = song => {
         return null;
       });
       if (index === blockLines.length - 1) {
-        songString = `${songString}${makeChordpro(line)}\n`;
+        songString = `${songString}${makeChordpro(trimline)}\n`;
         return null;
       }
-      console.log('chords: ', chords);
-      console.log('previousChords', previousChords);
+      if (trimline === '') {
+        songString = `${songString}\n`;
+      }
+      if (
+        !previousChords.length &&
+        !!chords &&
+        blockLines[index + 1].trimRight() === ''
+      ) {
+        songString = `${songString}${makeChordpro(trimline)}\n`;
+      }
       previousChords = chords;
       return null;
     });
-    songString = `${songString}\n\n`; // adds block to the songString
+    songString = `${songString}\n`; // adds block to the songString
     return null;
   });
   return songString.trim();
