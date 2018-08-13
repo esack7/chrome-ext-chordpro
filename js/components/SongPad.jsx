@@ -5,6 +5,7 @@ import { TextBox, Buttons, Aside } from '../style/Styles';
 import parse from '../utils/parse_chordpro';
 import create from '../utils/create_chordpro';
 import { keyList } from '../utils/chords';
+import transpose from '../utils/transpose';
 
 class SongPad extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class SongPad extends React.Component {
       this.state = {
         songInput: '',
         prevInput: '',
+        currentKey: 'A',
+        newKey: 'A',
       };
     }
 
@@ -23,6 +26,9 @@ class SongPad extends React.Component {
     this.handleCreate = this.handleCreate.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleSelectCurrentKey = this.handleSelectCurrentKey.bind(this);
+    this.handleSelectNewKey = this.handleSelectNewKey.bind(this);
+    this.handleTranspose = this.handleTranspose.bind(this);
   }
 
   componentDidUpdate() {
@@ -47,6 +53,14 @@ class SongPad extends React.Component {
     this.setState({ songInput: create(songInput) });
   }
 
+  handleTranspose() {
+    const { songInput, currentKey, newKey } = this.state;
+    this.setState({
+      songInput: transpose(songInput, currentKey, newKey),
+      currentKey: newKey,
+    });
+  }
+
   handleUndo() {
     const { prevInput } = this.state;
     this.setState({ songInput: prevInput });
@@ -65,9 +79,19 @@ class SongPad extends React.Component {
     this.setState({ songInput: value });
   }
 
+  handleSelectCurrentKey(e) {
+    const { value } = e.target;
+    this.setState({ currentKey: value });
+  }
+
+  handleSelectNewKey(e) {
+    const { value } = e.target;
+    this.setState({ newKey: value });
+  }
+
   render() {
-    const { importPdfClick, transposeClick } = this.props;
-    const { songInput } = this.state;
+    const { importPdfClick } = this.props;
+    const { songInput, currentKey, newKey } = this.state;
     return (
       <div>
         <Aside>
@@ -79,6 +103,7 @@ class SongPad extends React.Component {
               name="currentKey"
               id="currentKey"
               onChange={this.handleSelectCurrentKey}
+              value={currentKey}
             >
               {keyList.map(ele => (
                 <option key={uuid()} value={ele}>
@@ -94,6 +119,7 @@ class SongPad extends React.Component {
               name="newKey"
               id="newKey"
               onChange={this.handleSelectNewKey}
+              value={newKey}
             >
               {keyList.map(ele => (
                 <option key={uuid()} value={ele} typeof="newKey">
@@ -102,7 +128,7 @@ class SongPad extends React.Component {
               ))}
             </select>
           </label>
-          <Buttons onClick={transposeClick}>Transpose</Buttons>
+          <Buttons onClick={this.handleTranspose}>Transpose</Buttons>
           <Buttons onClick={importPdfClick}>Import PDF</Buttons>
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
@@ -119,7 +145,6 @@ class SongPad extends React.Component {
 
 SongPad.propTypes = {
   importPdfClick: PropTypes.func.isRequired,
-  transposeClick: PropTypes.func.isRequired,
 };
 
 export default SongPad;
