@@ -12,20 +12,9 @@ describe('Testing parse_chordpro.js file', () => {
   const noChords = `Title\nI'm a yankee doodle dandy\nA yankee doodle do or die\nA real live nephew of my Uncle Sam\nBorn on the 4th of July`;
   const inputTitleChords = `Title\n[A]   [B]   [Cmaj7]      [Dm]`;
   const outputTitleChords = `Title\nA   B   Cmaj7      Dm`;
-  const outputSongVerse = `Chorus
-C           G/B         Am7
-Holy, Holy, Holy, Holy Lord
-             F
-The earth is Yours and singing
-C           Em         Am7
-Holy, Holy, Holy, Holy Lord
-             F                   C
-The earth is Yours. The earth is Yours`;
-  const inputSongVerseChordpro = `Chorus
-[C]Holy, Holy, [G/B]Holy, Holy L[Am7]ord 
-The earth is [F]Yours and singing
-[C]Holy, Holy, [Em]Holy, Holy [Am7]Lord
-The earth is [F]Yours. The earth is [C]Yours`;
+  const outputSongVerse = `Chorus\nC           G/B         Am7\nHoly, Holy, Holy, Holy Lord\n             F\nThe earth is Yours and singing\nC           Em         Am7\nHoly, Holy, Holy, Holy Lord\n             F                   C\nThe earth is Yours. The earth is Yours`;
+  const inputSongVerseChordpro = `Chorus\n[C]Holy, Holy, [G/B]Holy, Holy L[Am7]ord \nThe earth is [F]Yours and singing\n[C]Holy, Holy, [Em]Holy, Holy [Am7]Lord\nThe earth is [F]Yours. The earth is [C]Yours`;
+
   test('Will return a string', () => {
     expect(typeof parse(inputChordPro)).toBe(typeof 'string');
   });
