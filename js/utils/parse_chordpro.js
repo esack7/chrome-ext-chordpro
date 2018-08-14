@@ -68,7 +68,7 @@ const splitLine = line => {
     lyricLine = `${lyricLine}${char}`;
     return null;
   });
-  return `${chordLine.trimRight()}\n${lyricLine}`;
+  return `${chordLine.trimRight()}\n${lyricLine.trimRight()}`;
 };
 
 module.exports = chordPro => {

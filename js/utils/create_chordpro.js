@@ -34,7 +34,8 @@ module.exports = song => {
             }
             songString = `${songString}${a}${b}`;
           }
-          songString = `${songString}\n`;
+          songString = `${songString.trimRight()}\n`;
+          previousChords = [];
           return null;
         }
         songString = `${songString}${trimline}\n`;
@@ -43,7 +44,6 @@ module.exports = song => {
       const chords = [];
       const chordSplit = trimline.split(' ');
       chordSplit.map(idx => {
-        // console.log(idx);
         if (idx.length) {
           const repeat = idx.length;
           chords.push(idx);

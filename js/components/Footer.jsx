@@ -9,7 +9,7 @@ const Footer = () => (
         Isaac Heist
       </NonHyper>
     </FootText>
-    <FootText>version 1.0.4</FootText>
+    <FootText>version 1.5.1</FootText>
   </Foot>
 );
 

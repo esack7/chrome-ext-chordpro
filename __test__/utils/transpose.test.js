@@ -12,7 +12,9 @@ describe('Testing transpose.js', () => {
   const simpleCompoundKeyOfA = `         A/C#     B        D   E\nHello to the bird from the world`;
   const simpleCompoundKeyOfG = `         G/B      A        C   D\nHello to the bird from the world`;
   const songKeyG = `Intro\nEm D G C\n\nVerse 1\n     G\nYou unravel me, with a melody\n      C             D      G\nYou surround me with a song\n     G\nOf deliverance, from my enemies\n     C          D         G\nTill all my fears are gone\n\nChorus\n        C        D        G\nI’m no longer a slave to fear\n Em     D        G\nI am a child of God\n\nBridge\nEm            D              G          C\nYou split the sea so I could walk right through it\nEm           D                  G    C\nMy fears are drowned in perfect love \nEm          D             G         C\nYou rescued me and I will stand and sing\n Em    D       G    C\nI am a child of God`;
-  const songKeyA = `Intro\nF#m E A D\n\nVerse 1\n     A\nYou unravel me, with a melody\n      D             E      A\nYou surround me with a song\n     A\nOf deliverance, from my enemies\n     D          E         A\nTill all my fears are gone\n\nChorus\n        D        E        A\nI’m no longer a slave to fear\n F#m    E        A\nI am a child of God\n\nBridge\nF#m           E              A          D\nYou split the sea so I could walk right through it\nF#m          E                  A    D\nMy fears are drowned in perfect love \nF#m         E             A         D\nYou rescued me and I will stand and sing\n F#m   E       A    D\nI am a child of God`;
+  const songKeyA = `Intro\nF#m E A D\n\nVerse 1\n     A\nYou unravel me, with a melody\n      D             E      A\nYou surround me with a song\n     A\nOf deliverance, from my enemies\n     D          E         A\nTill all my fears are gone\n\nChorus\n        D        E        A\nI’m no longer a slave to fear\n F#m    E        A\nI am a child of God\n\nBridge\nF#m           E              A          D\nYou split the sea so I could walk right through it\nF#m          E                  A    D\nMy fears are drowned in perfect love\nF#m         E             A         D\nYou rescued me and I will stand and sing\n F#m   E       A    D\nI am a child of God`;
+  const verseRepeatKeyG = `Bridge\nG                 D\nNo You never gave up on me!\nA                 Bm\nNo You never gave up on me!\nG                 D          A\nNo You never gave up on me!\n                          (X2)`;
+  const verseRepeatKeyA = `Bridge\nA                 E\nNo You never gave up on me!\nB                 C#m\nNo You never gave up on me!\nA                 E          B\nNo You never gave up on me!\n                          (X2)`;
   test('Simple song line in chordpro format key of A should transpose correctly to same format in key of G', () => {
     expect(transpose(chordproSimpleKeyOfA, 'A', 'G')).toBe(
       chordproSimpleKeyOfG
@@ -31,5 +33,8 @@ describe('Testing transpose.js', () => {
   });
   test('Song in Key of G not in ChordPro format will transpose correctly to song in Key of A not in Chordpro format', () => {
     expect(transpose(songKeyG, 'G', 'A')).toBe(songKeyA);
+  });
+  test('Verse in Key of G not in ChordPro format two non-chord lines at end will transpose correctly to verse in Key of A', () => {
+    expect(transpose(verseRepeatKeyG, 'G', 'A')).toBe(verseRepeatKeyA);
   });
 });

@@ -13,6 +13,8 @@ describe('Testing create_chordpro.js file', () => {
   const singleTitleChordChordpro = `Title\n[G]              [D]`;
   const introChords = `Intro\nF#m E A D`;
   const introChordsChordpro = `Intro\n[F#m] [E] [A] [D]`;
+  const verseRepeat = `Bridge\nG                 D\nNo You never gave up on me!\nA                 Bm\nNo You never gave up on me!\nG                 D          A\nNo You never gave up on me!\n                          (X2)`;
+  const verseRepeatChordpro = `Bridge\n[G]No You never gave [D]up on me!\n[A]No You never gave [Bm]up on me!\n[G]No You never gave [D]up on me!  [A]\n                          (X2)`;
   test('Will return type string', () => {
     expect(typeof create('string')).toBe(typeof 'string');
   });
@@ -53,5 +55,8 @@ describe('Testing create_chordpro.js file', () => {
     expect(create(`${singleTitleChordLyric}\n`)).toBe(
       `${singleTitleChordLyricChordpro}`
     );
+  });
+  test('Verse that ends with two non-chord lines at end will convert to Chordpro properly', () => {
+    expect(create(verseRepeat)).toBe(verseRepeatChordpro);
   });
 });
