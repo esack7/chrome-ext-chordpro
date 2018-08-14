@@ -20,7 +20,6 @@ module.exports = (song, currentKey, transposeKey) => {
             if (section.includes(']')) {
               const x = section.split(']');
               const wholeChord = x[0];
-              // implement extractChord(chord)
               let { chord, postfix } = extract(wholeChord, currentKey);
               const index = keyChords[currentKey].indexOf(chord);
               if (postfix.includes('/')) {

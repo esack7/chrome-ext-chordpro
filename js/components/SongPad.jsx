@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-import { TextBox, Buttons, Aside } from '../style/Styles';
+import { TextBox, Buttons, Aside, Label, TransposeDiv } from '../style/Styles';
 import parse from '../utils/parse_chordpro';
 import create from '../utils/create_chordpro';
 import { keyList } from '../utils/chords';
@@ -90,46 +90,48 @@ class SongPad extends React.Component {
   }
 
   render() {
-    const { importPdfClick } = this.props;
+    // const { importPdfClick } = this.props;
     const { songInput, currentKey, newKey } = this.state;
     return (
       <div>
         <Aside>
           <Buttons onClick={this.handleParse}>ChordPro to Chord/Lyric</Buttons>
           <Buttons onClick={this.handleCreate}>Chord/Lyric to ChordPro</Buttons>
-          <label htmlFor="currentKey">
-            Current Key
-            <select
-              name="currentKey"
-              id="currentKey"
-              onChange={this.handleSelectCurrentKey}
-              value={currentKey}
-            >
-              {keyList.map(ele => (
-                <option key={uuid()} value={ele}>
-                  {ele}
-                </option>
-              ))}
-            </select>
-          </label>
-          <br />
-          <label htmlFor="newKey">
-            New Key
-            <select
-              name="newKey"
-              id="newKey"
-              onChange={this.handleSelectNewKey}
-              value={newKey}
-            >
-              {keyList.map(ele => (
-                <option key={uuid()} value={ele} typeof="newKey">
-                  {ele}
-                </option>
-              ))}
-            </select>
-          </label>
-          <Buttons onClick={this.handleTranspose}>Transpose</Buttons>
-          <Buttons onClick={importPdfClick}>Import PDF</Buttons>
+          <TransposeDiv>
+            <Label htmlFor="currentKey">
+              Current Key
+              <select
+                name="currentKey"
+                id="currentKey"
+                onChange={this.handleSelectCurrentKey}
+                value={currentKey}
+              >
+                {keyList.map(ele => (
+                  <option key={uuid()} value={ele}>
+                    {ele}
+                  </option>
+                ))}
+              </select>
+            </Label>
+            <br />
+            <Label htmlFor="newKey">
+              New Key
+              <select
+                name="newKey"
+                id="newKey"
+                onChange={this.handleSelectNewKey}
+                value={newKey}
+              >
+                {keyList.map(ele => (
+                  <option key={uuid()} value={ele} typeof="newKey">
+                    {ele}
+                  </option>
+                ))}
+              </select>
+            </Label>
+            <Buttons onClick={this.handleTranspose}>Transpose</Buttons>
+          </TransposeDiv>
+          {/* <Buttons onClick={importPdfClick}>Import PDF</Buttons> */}
           <Buttons onClick={this.handleUndo}>Undo</Buttons>
           <Buttons onClick={this.handleClear}>Clear</Buttons>
         </Aside>
@@ -143,8 +145,8 @@ class SongPad extends React.Component {
   }
 }
 
-SongPad.propTypes = {
-  importPdfClick: PropTypes.func.isRequired,
-};
+// SongPad.propTypes = {
+//   importPdfClick: PropTypes.func.isRequired,
+// };
 
 export default SongPad;
