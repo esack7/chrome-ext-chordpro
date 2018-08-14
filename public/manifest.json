@@ -1,10 +1,8 @@
 {
   "manifest_version": 2,
-
   "name": "Simple ChordPro",
   "description": "This app helps utilize and create ChordPro",
-  "version": "1.0.4",
-
+  "version": "1.5.1",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"

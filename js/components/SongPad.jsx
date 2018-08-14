@@ -55,6 +55,7 @@ class SongPad extends React.Component {
 
   handleTranspose() {
     const { songInput, currentKey, newKey } = this.state;
+    this.setState({ prevInput: songInput });
     this.setState({
       songInput: transpose(songInput, currentKey, newKey),
       currentKey: newKey,
