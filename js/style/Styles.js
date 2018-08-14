@@ -91,6 +91,19 @@ const FileInput = styled.input`
   background-color: hsl(220, 14%, 71%);
 `;
 
+const Label = styled.label`
+  color: hsl(220, 14%, 71%);
+  display: inline-block;
+  text-align: center;
+  padding: 5px;
+`;
+
+const TransposeDiv = styled.div`
+  border: 2px solid hsl(220, 14%, 71%);
+  width: 125px;
+  display: table-cell;
+  padding: 2px;
+`;
 export {
   BaseStyles,
   AppContain,
@@ -105,4 +118,6 @@ export {
   Setting,
   Explain,
   FileInput,
+  Label,
+  TransposeDiv,
 };
