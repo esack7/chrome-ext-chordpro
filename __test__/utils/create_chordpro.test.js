@@ -11,6 +11,8 @@ describe('Testing create_chordpro.js file', () => {
   const singleDescriptionChordPro = `${singleDescription}`;
   const singleTitleChord = `Title\nG              D`;
   const singleTitleChordChordpro = `Title\n[G]              [D]`;
+  const introChords = `Intro\nF#m E A D`;
+  const introChordsChordpro = `Intro\n[F#m] [E] [A] [D]`;
   test('Will return type string', () => {
     expect(typeof create('string')).toBe(typeof 'string');
   });
@@ -43,6 +45,9 @@ describe('Testing create_chordpro.js file', () => {
   });
   test('2 line block of Title/Chord will convert properly to 2 line of chordpro', () => {
     expect(create(singleTitleChord)).toBe(singleTitleChordChordpro);
+  });
+  test('2 line block of Intro/Chords will convert properly to 2 line of chordpro', () => {
+    expect(create(introChords)).toBe(introChordsChordpro);
   });
   test('3 line block of Title/Chords/Lyrics plus newline will convert properly to 2 line chordpro', () => {
     expect(create(`${singleTitleChordLyric}\n`)).toBe(
