@@ -34,6 +34,8 @@ const TextBox = styled.textarea`
   max-width: 665px;
   height: 400px;
   margin: 10px;
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 `;
 
 const Aside = styled.aside`

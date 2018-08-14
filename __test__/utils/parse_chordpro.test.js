@@ -14,9 +14,13 @@ describe('Testing parse_chordpro.js file', () => {
   const outputTitleChords = `Title\nA   B   Cmaj7      Dm`;
   const outputSongVerse = `Chorus\nC           G/B         Am7\nHoly, Holy, Holy, Holy Lord\n             F\nThe earth is Yours and singing\nC           Em         Am7\nHoly, Holy, Holy, Holy Lord\n             F                   C\nThe earth is Yours. The earth is Yours`;
   const inputSongVerseChordpro = `Chorus\n[C]Holy, Holy, [G/B]Holy, Holy L[Am7]ord \nThe earth is [F]Yours and singing\n[C]Holy, Holy, [Em]Holy, Holy [Am7]Lord\nThe earth is [F]Yours. The earth is [C]Yours`;
-
+  const interludeChordpro = `Interlude\n[F#m]Ohhh[E], [A]Oh[D]hh...`;
+  const interlude = `Interlude\nF#m E A D\nOhhh, Ohhh...`;
   test('Will return a string', () => {
     expect(typeof parse(inputChordPro)).toBe(typeof 'string');
+  });
+  test('2 Lines interlude chordpro will parse properly to 3 lines', () => {
+    expect(parse(interludeChordpro)).toBe(interlude);
   });
   test('Will parse one-line chordPro to chord/lyric on separate lines', () => {
     expect(parse(inputChordPro)).toBe(outputChordLyric);

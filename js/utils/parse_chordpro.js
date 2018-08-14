@@ -1,16 +1,27 @@
 const lineTrim = require('./lineTrim');
+const detectChords = require('./detectChords');
 
 const detectChordpro = line => {
   if (line.split('').includes('[')) return true;
   return false;
 };
 
+// below using code from MDN docs to flatten an array
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
+const flattenDeep = arr1 =>
+  arr1.reduce(
+    (acc, val) =>
+      Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
+    []
+  );
+
 const detectLyrics = line => {
   if (
-    line
-      .split(' ')
+    flattenDeep(
+      line.split(' ').map(word => word.split('[').map(part => part.split(']')))
+    )
       .filter(ele => ele !== '')
-      .map(word => word.includes('['))
+      .map(ele => detectChords(ele))
       .includes(false)
   )
     return true;
