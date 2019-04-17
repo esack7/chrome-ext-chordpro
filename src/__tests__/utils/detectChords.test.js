@@ -1,4 +1,4 @@
-const detect = require('../../js/utils/detectChords');
+const detect = require('../../utils/detectChords');
 
 describe('Testing dectectChords.js', () => {
   test('Passing in random text will return false', () => {

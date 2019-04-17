@@ -1,9 +1,9 @@
-const { keyChords } = require('./chords');
-const extract = require('./chordExtract');
-const createChordpro = require('./create_chordpro');
-const parseChordpro = require('./parse_chordpro');
+import { keyChords } from './chords';
+import extract from './chordExtract';
+import createChordpro from './create_chordpro';
+import parseChordpro from './parse_chordpro';
 
-module.exports = (song, currentKey, transposeKey) => {
+const transpose = (song, currentKey, transposeKey) => {
   let convertBack = false;
   let songString = song;
   if (!song.includes('[')) {
@@ -54,3 +54,5 @@ module.exports = (song, currentKey, transposeKey) => {
   }
   return logic;
 };
+
+export default transpose;

@@ -1,4 +1,4 @@
-const transpose = require('./../../js/utils/transpose');
+const transpose = require('./../../utils/transpose').default;
 
 describe('Testing transpose.js', () => {
   const chordproKeyOfASong =

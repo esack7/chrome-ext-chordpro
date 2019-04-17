@@ -21,7 +21,6 @@ class App extends React.Component {
 
   render() {
     // const { importPdf } = this.state;
-    BaseStyles();
     // if (importPdf) {
     //   return (
     //     <AppContain>
@@ -33,13 +32,16 @@ class App extends React.Component {
     // }
 
     return (
-      <AppContain>
-        <Header />
-        <SongPad
-        // importPdfClick={this.handleImportPdfClick}
-        />
-        <Footer />
-      </AppContain>
+      <div>
+        <BaseStyles />
+        <AppContain>
+          <Header />
+          <SongPad
+          // importPdfClick={this.handleImportPdfClick}
+          />
+          <Footer />
+        </AppContain>
+      </div>
     );
   }
 }

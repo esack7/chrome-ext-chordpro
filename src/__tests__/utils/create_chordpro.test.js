@@ -1,4 +1,4 @@
-const create = require('../../js/utils/create_chordpro');
+const create = require('../../utils/create_chordpro');
 
 describe('Testing create_chordpro.js file', () => {
   const singleChordLyric = `G              D\nHello there birdie!`;
