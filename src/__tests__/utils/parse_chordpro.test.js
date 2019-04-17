@@ -1,4 +1,4 @@
-const parse = require('../../js/utils/parse_chordpro');
+const parse = require('../../utils/parse_chordpro');
 
 describe('Testing parse_chordpro.js file', () => {
   const inputChordPro = `[G]Hello there bir[D]die!`;

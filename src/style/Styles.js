@@ -1,7 +1,7 @@
-import styled, { injectGlobal } from 'styled-components';
-import reset from './Reset';
+import styled, { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
-const BaseStyles = () => injectGlobal`
+const BaseStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
   ${reset};
 `;
