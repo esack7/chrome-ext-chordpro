@@ -10,7 +10,12 @@ module.exports = song => {
     const blockLines = block.split('\n');
     let previousChords = [];
     blockLines.map((line, index) => {
-      const trimline = line.trimRight();
+      let trimline = line.trimRight();
+      // Converts tab character to 8 space characters
+      if (trimline.split('\t').length > 1) {
+        trimline = trimline.split('\t').join('        ');
+      }
+      // ///////////////////////////////////////
       if (!chordCheck(trimline) && !!trimline.trim()) {
         if (previousChords.length) {
           let longer;

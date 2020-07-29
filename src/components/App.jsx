@@ -14,10 +14,10 @@ class App extends React.Component {
     // this.handleImportPdfClick = this.handleImportPdfClick.bind(this);
   }
 
-  handleImportPdfClick() {
-    const { importPdf } = this.state;
-    this.setState({ importPdf: !importPdf });
-  }
+  // handleImportPdfClick() {
+  //   const { importPdf } = this.state;
+  //   this.setState({ importPdf: !importPdf });
+  // }
 
   render() {
     // const { importPdf } = this.state;
