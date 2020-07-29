@@ -15,6 +15,8 @@ describe('Testing create_chordpro.js file', () => {
   const introChordsChordpro = `Intro\n[F#m] [E] [A] [D]`;
   const verseRepeat = `Bridge\nG                 D\nNo You never gave up on me!\nA                 Bm\nNo You never gave up on me!\nG                 D          A\nNo You never gave up on me!\n                          (X2)`;
   const verseRepeatChordpro = `Bridge\n[G]No You never gave [D]up on me!\n[A]No You never gave [Bm]up on me!\n[G]No You never gave [D]up on me!  [A]\n                          (X2)`;
+  const withTabInput = `Verse\nD                 Bm\nJesus, name above all names\n\t  Em\nBeautiful Savior\n\t Asus A\nGlorious Lord\n  D              Bm\nEmmanuel, God is with us\n\t  Em     A         D  \nBlessed Redeemer,  Living Word`;
+  const withTabExpectedOutput = `Verse\n[D]Jesus, name above [Bm]all names\nBeautiful [Em]Savior\nGlorious [Asus]Lord [A]\nEm[D]manuel, God is [Bm]with us\nBlessed Re[Em]deemer,[A]  Living W[D]ord`;
   test('Will return type string', () => {
     expect(typeof create('string')).toBe(typeof 'string');
   });
@@ -58,5 +60,8 @@ describe('Testing create_chordpro.js file', () => {
   });
   test('Verse that ends with two non-chord lines at end will convert to Chordpro properly', () => {
     expect(create(verseRepeat)).toBe(verseRepeatChordpro);
+  });
+  test('Lines that contain a tab character will be properly converted to Chordpro', () => {
+    expect(create(withTabInput)).toBe(withTabExpectedOutput);
   });
 });
