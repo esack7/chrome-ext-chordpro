@@ -1,15 +1,15 @@
-import React from 'react';
-import { Foot, FootText, NonHyper } from '../style/Styles';
+import React from "react";
+import { Foot, FootText, NonHyper } from "../style/Styles";
 
 const Footer = () => (
   <Foot>
     <FootText>
-      Created and designed by{' '}
+      Created and designed by{" "}
       <NonHyper href="https://github.com/esack7" target="_blank">
         Isaac Heist
       </NonHyper>
     </FootText>
-    <FootText>version 1.5.1</FootText>
+    <FootText>version 1.6.0</FootText>
   </Foot>
 );
 
